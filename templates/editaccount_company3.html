@@ -616,7 +616,7 @@ width:890px!important;
 
                                       <div class="row form-group ">
                                         <label class="col-md-3 col-sm-12 col-xs-12 lbl" for="entityname">Entity Name</label>
-                                        <input type="text" onkeypress="displayoff(event)" value="{{user_addr_s2.entity_name}}" class=" col-sm-12 col-xs-12 col-md-8" placeholder="Enter EntityName" name="entity_name3" id="entity_name3" for="">
+                                        <input type="text" maxlength="254" onkeypress="displayoff(event)" value="{{user_addr_s2.entity_name}}" class=" col-sm-12 col-xs-12 col-md-8" placeholder="Enter EntityName" name="entity_name3" id="entity_name3" for="">
                                           {% if Empty_flag %}
                                             <span type="text"  id="spannameempty"  class=" col-sm-12 col-xs-12 col-md-8" style="color:red">Entity Name should not be empty</span>
 
@@ -630,13 +630,13 @@ width:890px!important;
 
                                      <div class="row form-group">
                                       <label class="col-md-3 col-sm-12 col-xs-12 lbl" for="mail">Entity Email</label>
-                                      <input type="email" value="{{user_addr_s2.email}}" placeholder="Enter a entity mail" class="col-md-8 col-sm-12 col-xs-12"  id="entity_mail3" name="entity_mail3" pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}"/>
+                                      <input type="email" maxlength="254" value="{{user_addr_s2.email}}" placeholder="Enter a entity mail" class="col-md-8 col-sm-12 col-xs-12"  id="entity_mail3" name="entity_mail3" pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}"/>
                                      </div>
 
 
                                      <div class="row form-group">
                                       <label class="col-md-3 col-sm-12 col-xs-12 lbl" for="contact no">Contact No:</label>
-                                      <input class="col-md-8 col-sm-12 col-xs-12" type="text" value='{{user_addr_s2.contact_no| default_if_none:""}}' placeholder="contact no"  id="entity_contact_no3" name="entity_contact_no3" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                                      <input class="col-md-8 col-sm-12 col-xs-12" maxlength="254" type="text" value='{{user_addr_s2.contact_no| default_if_none:""}}' placeholder="contact no"  id="entity_contact_no3" name="entity_contact_no3" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
                                    </div>
                                          <div class="row form-group">
                                       <h5 class="acch5"> Address:</h5>
@@ -644,11 +644,11 @@ width:890px!important;
                                     </div>
                                         <div class="row form-group">
                                         <label class="col-md-3 col-sm-12 col-xs-12 lbl" for="address"> Door no & Street </label>
-                                        <input type="text" value="{{user_addr_s2.door_street}}" placeholder="Enter door and street"  class="col-md-8 col-sm-12 col-xs-12"  id="entity_adddoor3" name="entity_adddoor3"/>
+                                        <input type="text" maxlength="254" value="{{user_addr_s2.door_street}}" placeholder="Enter door and street"  class="col-md-8 col-sm-12 col-xs-12"  id="entity_adddoor3" name="entity_adddoor3"/>
                                         </div>
                                     <div class="row form-group">
                                       <label class="col-md-3 col-sm-12 col-xs-12 lbl" for="address">Locality</label>
-                                      <input type="text" value="{{user_addr_s2.locality}}" onkeypress="localityempty(event)" placeholder="Enter locality" class="col-md-8 col-sm-12 col-xs-12"  id="entity_locality3" name="entity_locality3"/>
+                                      <input type="text"maxlength="254" value="{{user_addr_s2.locality}}" onkeypress="localityempty(event)" placeholder="Enter locality" class="col-md-8 col-sm-12 col-xs-12"  id="entity_locality3" name="entity_locality3"/>
                                       {% if empty_flag %}
                                             <span type="text"  id="spanlocalityempty"   class=" col-sm-12 col-xs-12 col-md-8" style="color:red">locality Should not be empty</span>
                                       {% endif %}
@@ -666,7 +666,7 @@ width:890px!important;
 												</select>
                                         <label class="col-md-3 col-sm-12 col-xs-12 lbl" for="address">Pincode</label>
 
-                                        <input type="text" value='{{user_addr_s2.pincode| default_if_none:""}}' id="entity_pincode3" name="entity_pincode3" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                                        <input type="text" maxlength="6" value='{{user_addr_s2.pincode| default_if_none:""}}' id="entity_pincode3" name="entity_pincode3" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
                                     </div>
                                     </div>
                                       <h5 class="acch5"> Governance:</h5>
@@ -674,11 +674,11 @@ width:890px!important;
                                     </div>
                                     <div class="row form-group">
                                       <label class="col-md-3 col-sm-12 col-xs-12 lbl" for="gstin">GSTIN:</label>
-                                      <input type="text" value="{{user_addr_s2.gstin}}" placeholder="GSTIN" class="col-md-8 col-sm-12 col-xs-12"  id="entity_gstin3" name="entity_gstin3"/>
+                                      <input type="text" maxlength="15" value="{{user_addr_s2.gstin}}" placeholder="GSTIN" class="col-md-8 col-sm-12 col-xs-12"  id="entity_gstin3" name="entity_gstin3"/>
                                    </div>
                                         <div class="row form-group">
                                       <label class="col-md-3 col-sm-12 col-xs-12 lbl" for="uin">UIN:</label>
-                                      <input type="text" value="{{user_addr_s2.uin}}" placeholder="uin" class="col-md-8 col-sm-12 col-xs-12"  id="entity_uin3" name="entity_uin3"/>
+                                      <input type="text" maxlength="15" value="{{user_addr_s2.uin}}" placeholder="uin" class="col-md-8 col-sm-12 col-xs-12"  id="entity_uin3" name="entity_uin3"/>
                                    </div>
 
                                    <div>
@@ -687,11 +687,11 @@ width:890px!important;
                                     </div>
                                    <div class="row form-group">
                                        <label class="col-md-3 col-sm-12 col-xs-12 lbl" for="insurancename">Insurance Company:</label>
-                                      <input type="text" value="{{user_addr_s2.insurance_name}}" placeholder="insurance name" class="col-md-8 col-sm-12 col-xs-12"  id="entity_insur_company3" name="entity_insur_company3"/>
+                                      <input type="text" maxlength="254" value="{{user_addr_s2.insurance_name}}" placeholder="insurance name" class="col-md-8 col-sm-12 col-xs-12"  id="entity_insur_company3" name="entity_insur_company3"/>
                                    </div>
                                     <div class="row form-group">
                                         <label class="col-md-3 col-sm-12 col-xs-12 lbl" for="insurno">Insurance No:</label>
-                                      <input type="text" value="{{user_addr_s2.insurance_no}}" placehodler="Insuance No" class="col-md-8 col-sm-12 col-xs-12"  id="entity_insur_no3" name="entity_insur_no3"/>
+                                      <input type="text" maxlength="50" value="{{user_addr_s2.insurance_no}}" placehodler="Insuance No" class="col-md-8 col-sm-12 col-xs-12"  id="entity_insur_no3" name="entity_insur_no3"/>
                                    </div>
                                          <div class="row form-group">
                                       <label class="col-md-3 col-sm-12 col-xs-12 lbl" for="expirdate">Expire Date:</label>

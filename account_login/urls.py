@@ -7,6 +7,10 @@ from .views import SignUpView, ActivateAccount
 from .forms import EmailValidationOnForgotPassword
 from django.contrib.auth.views import PasswordResetView
 
+handler404 = 'account_login.views.handler404'
+handler500 = 'account_login.views.handler500'
+handler403 = 'account_login.views.handler403'
+
 urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     # path('', views.home, name='home'),

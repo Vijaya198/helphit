@@ -18,7 +18,29 @@ from .tokens import account_activation_token, password_reset_token
 from vendor_process.views import *
 from datetime import datetime, date
 
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 
+
+def handler404(request, *args, **argv):
+    response = render_to_response('error.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 404
+
+    return response
+
+
+def handler500(request, *args, **argv):
+    response = render_to_response('error.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 500
+    return response
+
+def handler403(request, *args, **argv):
+    response = render_to_response('error.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 403
+    return response
 # from django.contrib.auth import get_user_model
 # User = get_user_model()
 

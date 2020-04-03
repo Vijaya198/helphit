@@ -55,6 +55,7 @@
 				 height:auto;
 			   }
 		  }
+
 	   	  .form-total {
     		background-color:rgb(255, 255, 255)
 		  }
@@ -220,8 +221,8 @@
 									<div class="form-row">
 										<div class="form-holder form-holder-2">
 											<label for="card-type">State*</label>
-												<select class="form-control" maxlength="254" name="state" id="state" style="height:35px;">
-													<option value="" disabled selected class="form-control">Select State</option>
+												<select maxlength="254" name="state" id="state" style="height:35px;">
+													<option value="" disabled selected>Select State</option>
 														{% for all_state in all_states %}
 														<option value="{{all_state.state}}">{{all_state.state}}</option>
 														{% endfor %}
@@ -444,7 +445,14 @@
 						 //$('#company_name_reg').css("border", "none");
 						return true;
                 	}
-            	}
+            	},
+            	error: function (xhr, status, errorThrown) {
+        			//Here the status code can be retrieved like;
+        			aler(xhr.status);
+
+					//The message added to Response object in Controller can be retrieved as following.
+        			alert(xhr.responseText);
+    			}
         	});
 		}
 }
@@ -485,7 +493,14 @@ $(document).ready(function(){
 						$('#spancompanynickname').text("");
 						return true;
                 	}
-            	}
+            	},
+            	error: function (xhr, status, errorThrown) {
+        			//Here the status code can be retrieved like;
+        			alert(xhr.status);
+
+        			//The message added to Response object in Controller can be retrieved as following.
+        			alert(xhr.responseText);
+    			}
         	});
         	//alert("hi")
   			//return False;

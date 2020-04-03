@@ -72,7 +72,15 @@
     background-position: top center;
     background-color:rgb(241, 244, 247);
 }
-
+  .inner .form-row .form-holder select {
+    background: #ffffff url('../images/wizard_v2_icon.png');
+    background-position: right 26px center;
+    z-index: 0;
+    cursor: pointer;
+    color: black;
+    position: relative;
+    border:solid 1px  lightgray !important;
+}
 
 .page-header {
     padding-bottom: 9px;
@@ -498,7 +506,7 @@ width:100%;
                                     <div class="row form-group">
                                         <label class="col-md-3 col-sm-12 col-xs-12 lbl" for="address">State:</label>
                                         <!--<input class="col-md-3 col-sm-12 col-xs-12" maxlength="254" type="text" value="{{user_addr_p.state}}"  id="entity_state1" name="entity_state1">-->
-                                        <select class="col-md-3 col-sm-12 col-xs-12" maxlength="254" name="entity_state1"  id="entity_state1" style="height:35px;">
+                                        <select maxlength="254" name="entity_state1"  id="entity_state1" style="height:35px;">
 													<option value='{{user_addr_p.state|default_if_none:""}}' selected >{{user_addr_p.state|default_if_none:""}}</option>
                                                     <option value="">None</option>
 														{% for all_state in all_states %}
@@ -506,9 +514,12 @@ width:100%;
 															<option value="{{all_state.state}}">{{all_state.state}}</option>
 														{% endfor %}
 												</select>
+                                    </div>
+                                    <div class="row form-group">
                                         <label class="col-md-3 col-sm-12 col-xs-12 lbl" for="address">Pincode</label>
 
-                                        <input maxlength="6" type="text" value='{{user_addr_p.pincode| default_if_none:""}}' id="entity_pincode1" name="entity_pincode1" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                                        <input  maxlength="6" type="text" value='{{user_addr_p.pincode| default_if_none:""}}' id="entity_pincode1" name="entity_pincode1" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+
                                     </div>
 
                                    <div class="row form-group">
@@ -535,7 +546,7 @@ width:100%;
                                    </div>
                                     <div class="row form-group">
                                         <label class="col-md-3 col-sm-12 col-xs-12 lbl" for="insurno">Insurance No:</label>
-                                      <input maxlength="254" type="text" value="{{user_addr_p.insurance_no}}" placehodler="Insuance No" class="col-md-8 col-sm-12 col-xs-12"  id="entity_insur_no1" name="entity_insur_no1">
+                                      <input maxlength="50" type="text" value="{{user_addr_p.insurance_no}}" placehodler="Insuance No" class="col-md-8 col-sm-12 col-xs-12"  id="entity_insur_no1" name="entity_insur_no1">
                                    </div>
                                          <div class="row form-group">
                                       <label class="col-md-3 col-sm-12 col-xs-12 lbl" for="expirdate">Expire Date:</label>

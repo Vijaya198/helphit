@@ -487,7 +487,7 @@ width:100%;
 
                                       <div class="row form-group ">
                                         <label class="col-md-3 col-sm-12 col-xs-12 lbl" for="entityname">Entity Name</label>
-                                        <input type="text" onkeypress="displayoff(event)" class="col-sm-12 col-xs-12 col-md-8" value="{{user_addr_s1.entity_name}}" placeholder="Enter EntityName" name="entity_name2" id="entity_name2" for="">
+                                        <input type="text" maxlength="254" onkeypress="displayoff(event)" class="col-sm-12 col-xs-12 col-md-8" value="{{user_addr_s1.entity_name}}" placeholder="Enter EntityName" name="entity_name2" id="entity_name2" for="">
                                           {% if Empty_flag %}
                                             <span type="text"  id="spannameempty"  class=" col-sm-12 col-xs-12 col-md-8" style="color:red">Entity Name should not be empty</span>
 
@@ -501,7 +501,7 @@ width:100%;
 
                                      <div class="row form-group">
                                       <label class="col-md-3 col-sm-12 col-xs-12 lbl" for="mail">Entity Email</label>
-                                      <input type="email" value="{{user_addr_s1.email}}" placeholder="Enter a entity mail" class="col-md-8 col-sm-12 col-xs-12"  id="entity_mail2" name="entity_mail2" pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}">
+                                      <input type="email" maxlength="254" value="{{user_addr_s1.email}}" placeholder="Enter a entity mail" class="col-md-8 col-sm-12 col-xs-12"  id="entity_mail2" name="entity_mail2" pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}">
                                      </div>
                                      <div class="row form-group">
                                       <label class="col-md-3 col-sm-12 col-xs-12 lbl" for="contact no">Contact No:</label>
@@ -514,11 +514,11 @@ width:100%;
                                     </div>
                                         <div class="row form-group">
                                          <label class="col-md-3 col-sm-12 col-xs-12 lbl" for="address">Door & street</label>
-                                        <input type="text" value="{{user_addr_s1.door_street}}" placeholder="Enter door and street"  class="col-md-8 col-sm-12 col-xs-12"  id="entity_adddoor2" name="entity_adddoor2"/>
+                                        <input type="text" maxlength="254" value="{{user_addr_s1.door_street}}" placeholder="Enter door and street"  class="col-md-8 col-sm-12 col-xs-12"  id="entity_adddoor2" name="entity_adddoor2"/>
                                         </div>
                                     <div class="row form-group">
                                       <label class="col-md-3 col-sm-12 col-xs-12 lbl" for="address">Locality</label>
-                                      <input type="text" value="{{user_addr_s1.locality}}" placeholder="Enter locality" class="col-md-8 col-sm-12 col-xs-12"  id="entity_locality2" name="entity_locality2"/>
+                                      <input type="text" maxlength="254" value="{{user_addr_s1.locality}}" placeholder="Enter locality" class="col-md-8 col-sm-12 col-xs-12"  id="entity_locality2" name="entity_locality2"/>
                                       {% if empty_flag %}
                                             <span type="text"  id="spanlocalityempty"  onkeypress="localityempty(event)" class=" col-sm-12 col-xs-12 col-md-8" style="color:red">locality Should not be empty</span>
                                       {% endif %}
@@ -536,7 +536,7 @@ width:100%;
 												</select>
                                         <label  class="col-md-3 col-sm-12 col-xs-12 lbl" for="address">Pincode</label>
 
-                                        <input type="" value='{{user_addr_s1.pincode| default_if_none:""}}' id="entity_pincode2" name="entity_pincode2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                                        <input type="text" maxlength="6" value='{{user_addr_s1.pincode| default_if_none:""}}' id="entity_pincode2" name="entity_pincode2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
                                     </div>
 
                                     <div class="row form-group">
@@ -545,11 +545,11 @@ width:100%;
                                     </div>
                                     <div class="row form-group">
                                       <label class="col-md-3 col-sm-12 col-xs-12 lbl" for="gstin">GSTIN:</label>
-                                      <input type="text" value="{{user_addr_s1.gstin}}" placeholder="GSTIN" class="col-md-8 col-sm-12 col-xs-12"  id="entity_gstin2" name="entity_gstin2"/>
+                                      <input type="text" maxlength="15" value="{{user_addr_s1.gstin}}" placeholder="GSTIN" class="col-md-8 col-sm-12 col-xs-12"  id="entity_gstin2" name="entity_gstin2"/>
                                    </div>
                                         <div class="row form-group">
                                       <label class="col-md-3 col-sm-12 col-xs-12 lbl" for="uin">UIN:</label>
-                                      <input type="text" value="{{user_addr_s1.uin}}" placeholder="uin" class="col-md-8 col-sm-12 col-xs-12"  id="entity_uin2" name="entity_uin2"/>
+                                      <input type="text" maxlength="15" value="{{user_addr_s1.uin}}" placeholder="uin" class="col-md-8 col-sm-12 col-xs-12"  id="entity_uin2" name="entity_uin2"/>
                                    </div>
                                    <div class="row form-group">
                                       <h5 class="acch5"> Insurance:</h5>
@@ -561,7 +561,7 @@ width:100%;
                                    </div>
                                     <div class="row form-group">
                                         <label class="col-md-3 col-sm-12 col-xs-12 lbl" for="insurno">Insurance No:</label>
-                                      <input type="text" value="{{user_addr_s1.insurance_no}}" placehodler="Insuance No" class="col-md-8 col-sm-12 col-xs-12"  id="entity_insur_no2" name="entity_insur_no2"/>
+                                      <input type="text" maxlength="50" value="{{user_addr_s1.insurance_no}}" placehodler="Insuance No" class="col-md-8 col-sm-12 col-xs-12"  id="entity_insur_no2" name="entity_insur_no2"/>
                                    </div>
                                          <div class="row form-group">
                                       <label class="col-md-3 col-sm-12 col-xs-12 lbl" for="expirdate">Expire Date:</label>

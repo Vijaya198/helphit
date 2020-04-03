@@ -1,8 +1,9 @@
 from django.urls import path
-
+#from path.to.view import Custom404
 from . import views
-
-
+handler404 = 'account_login.views.handler404'
+handler500 = 'account_login.views.handler500'
+handler403 = 'account_login.views.handler403'
 urlpatterns = [
 
 

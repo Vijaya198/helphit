@@ -19,24 +19,37 @@ from django.db.utils import OperationalError
 from django.contrib.auth.models import User
 
 from django.http import JsonResponse
-import account_login.views
+
 # Create your views here.
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 
 
+def handler404(request, *args, **argv):
+    response = render_to_response('error.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 404
 
-def home(request):
-    try:
-        vendor_infos = vendor_information.objects.filter(~Q(status="Deleted"))
+    return response
 
 
-        context = {
+def handler500(request, *args, **argv):
+    response = render_to_response('error.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 500
+    return response
 
-            "vendors_infos": vendor_infos
-        }
-        return render(request, "vendor.html", context)
-    except (OperationalError, ReadTimeout, ConnectTimeout, HTTPError, Timeout, ConnectionError,TypeError, KeyError,IndexError, ValueError,AttributeError, OverflowError, ValidationError, IntegrityError, InterfaceError) as e:
-        print("Exception: ", e)
-        return HttpResponse(e)
+def handler403(request, *args, **argv):
+    response = render_to_response('error.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 403
+    return response
+
+def handler400(request, *args, **argv):
+    response = render_to_response('error.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 400
+    return response
 
 def edit_account1(request, newContext={}):
 
@@ -93,7 +106,8 @@ def edit_account1(request, newContext={}):
             return render(request, "loginredirection.html")
     except (ReadTimeout, ConnectTimeout, HTTPError, Timeout, ConnectionError, TypeError,KeyError,IndexError,AttributeError, ValueError, OverflowError, ValidationError, IntegrityError, InterfaceError) as e:
         print("except")
-        return HttpResponse(e)
+        context = {"exception": e}
+        return render_to_response('error.html', context)
 
 
 def edit_account2(request, newContext={}):
@@ -150,7 +164,8 @@ def edit_account2(request, newContext={}):
             return render(request, "loginredirection.html")
     except (OperationalError,ReadTimeout, ConnectTimeout, HTTPError, Timeout, ConnectionError, TypeError, KeyError,
             IndexError,AttributeError,ValueError, OverflowError, ValidationError, IntegrityError, InterfaceError) as e:
-        print("except")
+        context = {"exception": e}
+        return render_to_response('error.html', context)
 
 def edit_account3(request, newContext={}):
     try:
@@ -211,7 +226,8 @@ def edit_account3(request, newContext={}):
             TypeError,KeyError,IndexError, AttributeError,ValueError, OverflowError,
             ValidationError, IntegrityError, InterfaceError) as e:
         print("except")
-        return HttpResponse(e)
+        context = {"exception": e}
+        return render_to_response('error.html', context)
 
 def edit_account_contact(request, newContext={}):
     try:
@@ -324,7 +340,8 @@ def account_mail(request):
     except (OperationalError, ReadTimeout, ConnectTimeout, HTTPError, Timeout, ConnectionError,TypeError,
             KeyError,IndexError, AttributeError, ValueError, OverflowError, ValidationError, IntegrityError, InterfaceError) as e:
         print("except")
-        return HttpResponse(e)
+        context = {"exception": e}
+        return render_to_response('error.html', context)
 
 def accountinfo(request):
     try:
@@ -379,7 +396,8 @@ def accountinfo(request):
     except (OperationalError, ReadTimeout, ConnectTimeout, HTTPError, Timeout, ConnectionError,TypeError,
             KeyError,IndexError, AttributeError, ValueError, OverflowError, ValidationError, IntegrityError, InterfaceError) as e:
         print("except")
-        return HttpResponse(e)
+        context = {"exception": e}
+        return render_to_response('error.html', context)
 
 
 def vendors(request):
@@ -390,40 +408,42 @@ def vendors(request):
             print("Id in Vendors ", request.session.get("id"))
 
             usr_id = request.session.get("id")
+
             data = vendor_information.objects.filter(account_id=usr_id).filter(~Q(status="Deleted"))
+            if (data):
+               context ={
+                    "vendors_infos": data,
 
-            context ={
-                "vendors_infos": data,
+                    }
+               return render(request, "vendor.html", context)
 
-            }
-            return render(request, "vendor.html", context)
         else:
             print("venodrs else ")
             return render(request, "loginredirection.html")
     except (OperationalError, ReadTimeout, ConnectTimeout, HTTPError, Timeout, ConnectionError,TypeError, KeyError,
             IndexError,AttributeError,ValueError, OverflowError, ValidationError, IntegrityError, InterfaceError) as e:
         print("except")
-        return HttpResponse(e)
+        context={"exception":e}
+        return render_to_response('error.html', context)
 
 def add_vendor(request):
     try:
         if(request.user.is_authenticated):
             print("SESSION_ID", request.session.get("id"))
-            print("session_key:Vendor", request.session.session_key)
+
             all_states = state.objects.all()
             if(all_states):
                 context={
                     "all_states":all_states
                 }
                 return render(request, "vendoradd5.html", context)
-            else:
-                return HttpResponseRedirect("user_login")
         else:
             return render(request, "loginredirection.html")
     except (OperationalError,ReadTimeout, ConnectTimeout, HTTPError, Timeout, ConnectionError,TypeError,KeyError,IndexError,
             AttributeError,ValueError, OverflowError, ValidationError, IntegrityError, InterfaceError) as e:
         print("Exception", e)
-        return HttpResponse(e)
+        context = {"exception": e}
+        return render_to_response('error.html', context)
 
 def valid_entity_locality(request):
     try:
@@ -461,37 +481,41 @@ def valid_entity_locality(request):
     except (OperationalError, ReadTimeout, ConnectTimeout, HTTPError, Timeout, ConnectionError,TypeError,KeyError,IndexError,
             AttributeError, ValueError, OverflowError, ValidationError, IntegrityError, InterfaceError) as e:
         print("Exception:" , e)
-        return HttpResponse(e)
+        context = {"exception": e}
+        return render_to_response('error.html', context)
 
 def valid_company_nick_name(request):
     try:
         company_nick_name = request.GET.get('company_nick_name', None)
         vendor_id=request.GET.get('vendor_id', None)
         print("vendor_id", vendor_id)
-        if(vendor_id == ""):
-            company_nicks = vendor_information.objects.annotate(
+        print("company_nick_name",company_nick_name)
+        if (company_nick_name):
+            if(vendor_id == ""):
+                company_nicks = vendor_information.objects.annotate(
                     company_nick_name_lower=Lower("company_nick_name")).filter(~Q(status="Deleted"))
-        else:
-            print("hello:", vendor_id)
-            company_nicks = vendor_information.objects.annotate(
-                company_nick_name_lower=Lower("company_nick_name")).filter(~Q(status="Deleted"), ~Q(vendor_id=vendor_id))
+            else:
+                print("hello:", vendor_id)
+                company_nicks = vendor_information.objects.annotate(
+                    company_nick_name_lower=Lower("company_nick_name")).filter(~Q(status="Deleted"), ~Q(vendor_id=vendor_id))
 
-        print("hello")
-        duplicate_flag = False
-        for company_nick in company_nicks:
-            if (company_nick.company_nick_name_lower == company_nick_name.lower()):
-                print(company_nick.company_nick_name_lower , "   ",company_nick_name.lower() )
-                duplicate_flag = True
-        print("local variable:", company_nick_name.lower())
+            print("hello")
+            duplicate_flag = False
+            for company_nick in company_nicks:
+                if (company_nick.company_nick_name_lower == company_nick_name.lower()):
+                    print(company_nick.company_nick_name_lower , "",company_nick_name.lower() )
+                    duplicate_flag = True
+            print("local variable:", company_nick_name.lower())
 
-        data = {
-            "duplicate_flag": duplicate_flag
-        }
-        return JsonResponse(data)
+            data = {
+                "duplicate_flag": duplicate_flag
+            }
+            return JsonResponse(data)
     except (OperationalError, ReadTimeout, ConnectTimeout, HTTPError, Timeout, ConnectionError,TypeError,KeyError,IndexError,
             AttributeError, ValueError, OverflowError, ValidationError, IntegrityError, InterfaceError) as e:
         print("Exception:" , e)
-        return HttpResponse(e)
+        context = {"exception": e}
+        return render_to_response('error.html', context)
 
 
 def vendor_register(request):
@@ -518,7 +542,7 @@ def vendor_register(request):
                 secondary_contact_name = request.POST["contact_name2"]
                 secondary_contact_no = request.POST["secondary_contact_no"]
                 if (secondary_contact_no == ""):
-                    secondary_contact_no =None
+                    secondary_contact_no = None
                 secondary_email = request.POST["secondary_email"]
                 gstin = request.POST["gstin"]
                 uin = request.POST["uin"]
@@ -532,9 +556,9 @@ def vendor_register(request):
                     print(expiry_temp_date)
                 #if (expiry_temp_date.split('/')[0]):
                     #if ()
-                temp_date=datetime.strptime(expiry_temp_date, '%m/%d/%Y')
-                print(temp_date)
-                expiry_date =temp_date.strftime('%Y-%m-%d')
+                    temp_date=datetime.strptime(expiry_temp_date, '%m/%d/%Y')
+                    print(temp_date)
+                    expiry_date =temp_date.strftime('%Y-%m-%d')
                  #temp_date=timezone.now()
                 created_date=str(datetime.strftime(datetime.now(),"%Y-%m-%d %H:%M"))
                 print("Secondary_name: ", secondary_contact_name, secondary_email)
@@ -542,6 +566,7 @@ def vendor_register(request):
 
                 #avoid duplication of company_nick_name in submission
                 duplicate_flag = False
+
                 company_nicks = vendor_information.objects.annotate(
                     company_nick_name_lower=Lower("company_nick_name")).filter(~Q(status="Deleted"))
                 for company_nick in company_nicks:
@@ -598,7 +623,8 @@ def vendor_register(request):
     except (OperationalError, ReadTimeout, ConnectTimeout, HTTPError, Timeout, ConnectionError,TypeError, KeyError,IndexError,
             AttributeError, ValueError, OverflowError, ValidationError, IntegrityError, InterfaceError) as e:
         print("Got this Exception:-  ", e)
-        return HttpResponse(e)
+        context = {"exception": e}
+        return render_to_response('error.html', context)
 
 def edit_vendor_details(request):
     try:
@@ -619,7 +645,8 @@ def edit_vendor_details(request):
             return render(request, "loginredirection.html")
     except (OperationalError, ReadTimeout, ConnectTimeout, HTTPError, Timeout, ConnectionError, TypeError,KeyError,IndexError, AttributeError, ValueError, OverflowError, User.DoesNotExist, ValidationError, IntegrityError, InterfaceError) as e:
         print("Exception:", e)
-        return HttpResponse(e)
+        context = {"exception": e}
+        return render_to_response('error.html', context)
 
 #rough use
 def edit_contactaccount(request):
@@ -667,6 +694,8 @@ def edit_contactaccount(request):
             return render(request, "loginredirection.html")
     except (OperationalError, ReadTimeout, ConnectTimeout, HTTPError, Timeout, ConnectionError, TypeError, KeyError,IndexError, AttributeError, ValueError, OverflowError, User.DoesNotExist, ValidationError, IntegrityError, InterfaceError) as e:
         print("Except", e)
+        context = {"exception": e}
+        return render_to_response('error.html', context)
 
 def edit_account1info(request):
     try:
@@ -752,7 +781,8 @@ def edit_account1info(request):
             IndexError, AttributeError, ValueError, OverflowError, User.DoesNotExist, ValidationError,
             IntegrityError, InterfaceError) as e:
         print("Except", e)
-        return HttpResponse (e)
+        context = {"exception": e}
+        return render_to_response('error.html', context)
 
 def edit_account2info(request):
     try:
@@ -838,7 +868,8 @@ def edit_account2info(request):
             IndexError, AttributeError, ValueError, OverflowError, User.DoesNotExist, ValidationError,
             IntegrityError, InterfaceError) as e:
         print("Except", e)
-        return HttpResponse(e)
+        context = {"exception": e}
+        return render_to_response('error.html', context)
 
 def edit_account3info(request):
     try:
@@ -921,7 +952,8 @@ def edit_account3info(request):
             IndexError, AttributeError, ValueError, OverflowError, User.DoesNotExist, ValidationError,
             IntegrityError, InterfaceError) as e:
         print("Except", e)
-        return HttpResponse(e)
+        context = {"exception": e}
+        return render_to_response('error.html', context)
 
 def edit_account_mail(request):
     try:
@@ -1010,7 +1042,8 @@ def edit_account_mail(request):
             IndexError, AttributeError, ValueError, OverflowError, User.DoesNotExist, ValidationError,
             IntegrityError, InterfaceError) as e:
         print("Except", e)
-        return HttpResponse(e)
+        context = {"exception": e}
+        return render_to_response('error.html', context)
 
 def updateVendor(request):
     try:
@@ -1108,7 +1141,8 @@ def updateVendor(request):
             return render(request, "loginredirection.html")
     except (OperationalError, ReadTimeout, ConnectTimeout, HTTPError, Timeout, ConnectionError, TypeError,KeyError,IndexError, AttributeError, ValueError, OverflowError, User.DoesNotExist, ValidationError, IntegrityError, InterfaceError) as e:
         print("Exception:", e)
-        return HttpResponse(e)
+        context = {"exception": e}
+        return render_to_response('error.html', context)
 
 
 def traders(request):
@@ -1119,7 +1153,9 @@ def confirm(request):
         return render(request, "successform.html")
     except (OperationalError, ReadTimeout, ConnectTimeout, HTTPError, Timeout, ConnectionError, TypeError,KeyError,IndexError,  AttributeError,ValueError, OverflowError, User.DoesNotExist, ValidationError, IntegrityError, InterfaceError) as e:
         print("Exception:", e)
-        return HttpResponse(e)
+        context = {"exception": e}
+        return render_to_response('error.html', context)
+
 def viewmore(request, id):
     try:
         print("hi")
@@ -1137,7 +1173,8 @@ def viewmore(request, id):
             return render(request, "loginredirection.html")
     except (OperationalError, ReadTimeout, ConnectTimeout, HTTPError, Timeout, ConnectionError, TypeError,KeyError,IndexError,  AttributeError,ValueError, OverflowError, User.DoesNotExist, ValidationError, IntegrityError, InterfaceError) as e:
         print("Exception:", e)
-        return HttpResponse(e)
+        context = {"exception": e}
+        return render_to_response('error.html', context)
 
 def table_info(request):
     try:
@@ -1171,7 +1208,8 @@ def table_info(request):
             return render(request, "loginredirection.html")
     except (OperationalError, ReadTimeout, ConnectTimeout, HTTPError, Timeout, ConnectionError, TypeError,KeyError,IndexError, AttributeError, ValueError, OverflowError, User.DoesNotExist, ValidationError, IntegrityError, InterfaceError) as e:
         print( "exception: ", e)
-        return HttpResponse(e)
+        context = {"exception": e}
+        return render_to_response('error.html', context)
 
 def delete_vendor_details(request):
     try:
@@ -1193,4 +1231,5 @@ def delete_vendor_details(request):
             return render(request, "loginredirection.html")
     except (OperationalError, ReadTimeout, ConnectTimeout, HTTPError, Timeout, ConnectionError, TypeError, KeyError,IndexError, AttributeError, ValueError, OverflowError, User.DoesNotExist, ValidationError, IntegrityError, InterfaceError) as e:
         print("Exception: ", e)
-        return HttpResponse(e)
+        context = {"exception": e}
+        return render_to_response('error.html', context)
