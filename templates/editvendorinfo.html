@@ -109,7 +109,7 @@
 				<div class="dropdown-menu dropdown-content dropdown-menu-right" role="menu" aria-labelledby="navbarDropdown1">
 				  <a href="accountinfo">Account Info</a>
 				  <a href="#">Payment Info</a>
-				  <a href="#">Forgot Password</a>
+				  <a href="password_reset">Forgot Password</a>
 			   </div>
 			  </li>
 			  </div>
@@ -428,7 +428,17 @@
 						$('#spancompanynickname').text("");
 						return true;
                 	}
-            	}
+            	},
+            	error: function (xhr, status, errorThrown) {
+        			//Here the status code can be retrieved like;
+        			//alert(xhr.status);
+
+					//The message added to Response object in Controller can be retrieved as following.
+        			//alert(xhr.responseText);
+        			document.write(xhr.responseText);
+        			return false;
+
+    			}
         	});
 		 }
 		 else
@@ -470,7 +480,17 @@
 						$('#company_name_reg').focus();
 						return true;
                 	}
-            	}
+            	},
+            	error: function (xhr, status, errorThrown) {
+        			//Here the status code can be retrieved like;
+        			//alert(xhr.status);
+
+					//The message added to Response object in Controller can be retrieved as following.
+        			//alert(xhr.responseText);
+        			document.write(xhr.responseText);
+        			return false;
+
+    			}
         	});
 		}
 }
@@ -512,7 +532,17 @@ $(document).ready(function(){
 						$('#spancompanynickname').text("");
 						return true;
                 	}
-            	}
+            	},
+            	error: function (xhr, status, errorThrown) {
+        			//Here the status code can be retrieved like;
+        			//alert(xhr.status);
+
+					//The message added to Response object in Controller can be retrieved as following.
+        			//alert(xhr.responseText);
+        			document.write(xhr.responseText);
+        			return false;
+
+    			}
         	});
         	//alert("hi")
   			//return False;
@@ -567,7 +597,17 @@ $(document).ready(function(){
                 	//alert("hi4");
 
                 	//return false;
-            	}
+            	},
+            	error: function (xhr, status, errorThrown) {
+        			//Here the status code can be retrieved like;
+        			//alert(xhr.status);
+
+					//The message added to Response object in Controller can be retrieved as following.
+        			//alert(xhr.responseText);
+        			document.write(xhr.responseText);
+        			return false;
+
+    			}
 
         });
 

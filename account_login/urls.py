@@ -7,6 +7,7 @@ from .views import SignUpView, ActivateAccount
 from .forms import EmailValidationOnForgotPassword
 from django.contrib.auth.views import PasswordResetView
 
+handler400 = 'account_login.views.handler400'
 handler404 = 'account_login.views.handler404'
 handler500 = 'account_login.views.handler500'
 handler403 = 'account_login.views.handler403'

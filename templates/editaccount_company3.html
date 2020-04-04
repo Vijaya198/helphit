@@ -236,7 +236,7 @@ width:890px!important;
 				<div class="dropdown-menu dropdown-content dropdown-menu-right" role="menu" aria-labelledby="navbarDropdown1">
 				  <a href="accountinfo">Account Info</a>
 				  <a href="#">Payment Info</a>
-				  <a href="#">Forgot Password</a>
+				  <a href="password_reset">Forgot Password</a>
 			   </div>
 			  </li>
 			  </div>
@@ -520,7 +520,7 @@ width:890px!important;
                           <div id="company2" class="tab-pane">
                   
                             <form id="formaccount" action="editaccounttwo" method="get">
-                                {% for usr_addr_s1 in user_addr_s1s %}
+                                {% for user_addr_s1 in user_addr_s1s %}
                               <div class="card border-light mb-3">
                                 <div class="card-block">
                                   
@@ -606,7 +606,7 @@ width:890px!important;
                             <div class="card-header1">
                               <div class="d-flex  justify-content-between align-items-center mb-3">
                                 <h5 class="card-title mb-0">
-                                  <button type="button" class="mt-0 pull-right  btn-four" onclick="accountinfo">Cancel</button>
+                                  <button class="mt-0 pull-right  btn-four" formaction="accountinfo">Cancel</button>
                                   <button type="submit" class="mt-0 mr-5 pull-right btn-four1" style="margin-right:6px;">Save </button>
                                 </h5>
                                

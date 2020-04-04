@@ -123,17 +123,17 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME':'cot_sandhai2',
         #'NAME':'cot_sandhai2',
-        'USER':'dme',
-        #'USER':'admin',
+        #'USER':'dme',
+        'USER':'admin',
         #'USER':'root',
-        #'PASSWORD':'cotton2019',
-        'PASSWORD': 'dharini2009',
+        'PASSWORD':'cotton2019',
+        #'PASSWORD': 'dharini2009',
         #'PASSWORD':'Kanishka07052010',
         #'HOST':'localhost',
-        #'HOST':'cottonsandhai.c4gydg2pk0kk.ap-south-1.rds.amazonaws.com',
-        'HOST':'localhost',
-        'PORT':'8888'
-        #'PORT':'3306'
+        'HOST':'cottonsandhai.c4gydg2pk0kk.ap-south-1.rds.amazonaws.com',
+        #'HOST':'localhost',
+        #'PORT':'8888'
+        'PORT':'3306'
         #'OPTIONS': {
         #   'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
        # }
