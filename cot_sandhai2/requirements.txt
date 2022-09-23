@@ -16,7 +16,7 @@ mysql-connector==2.2.9
 mysql-connector-python==8.0.18
 mysqlclient==1.4.6
 oauthlib==3.1.0
-protobuf==3.11.2
+protobuf==3.18.3
 pycparser==2.19
 pylint==2.4.4
 pylint-django==2.0.13
